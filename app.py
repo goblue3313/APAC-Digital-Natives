@@ -300,21 +300,21 @@ def main():
         layout="wide"
     )
     
-    st.title("📊 Enhanced Two-Stage Company Research")
-    st.markdown("*Stage 1: GPT-4o Complete Prep Sheet → Stage 2: o1-preview Enhancement*")
+    st.title("📊 Pre-Discovery Company Research")
+    st.markdown("*Step 1: Use GPT-4o to Complete Prep Sheet → Step 2: Use o1-preview to produce insights*")
     st.markdown("---")
     
     # Process explanation in sidebar
     with st.sidebar:
-        st.markdown("### Enhanced Process")
+        st.markdown("### Process Overview")
         st.info("""
-        **Stage 1: Complete Prep Sheet**
-        🔍 GPT-4o uses same comprehensive prompt
-        📊 Web search + complete analysis
+        **Step 1: Complete Prep Sheet**
+        🔍 GPT-4o takes comprehensive prompt
+        📊 Web searches + completes analysis
         🔗 Real source links included
         📋 Full prep sheet generated
         
-        **Stage 2: Strategic Enhancement**
+        **Step 2: Strategic Enhancement**
         🧠 o1-preview adds strategic depth
         💡 Enhanced insights & analysis
         🎯 Better use case recommendations
@@ -323,7 +323,7 @@ def main():
         
         st.markdown("### Why This Approach?")
         st.success("""
-        ✅ **Best of Both Worlds**
+        ✅ **Why this approach?**
         - GPT-4o: Excellent web research + concise output
         - o1-preview: Strategic depth + reasoning
         - Maintains GPT-4o's quality baseline
@@ -345,7 +345,7 @@ def main():
         )
     
     with col2:
-        search_button = st.button("🔍 Generate Enhanced Report", type="primary")
+        search_button = st.button("🔍 Generate Pre-Discovery Report", type="primary")
     
     if search_button and company_input:
         with st.spinner("Searching company data..."):
@@ -374,7 +374,7 @@ def main():
                 st.markdown("---")
                 
                 # Create progress indicators
-                st.markdown("## 🔄 Enhanced Two-Stage Process")
+                st.markdown("## 🔄 Generating Report")
                 progress_placeholder = st.empty()
                 status_placeholder = st.empty()
                 
@@ -395,8 +395,8 @@ def main():
                 
                 # Display results
                 if enhanced_prep_sheet and not any(fail_text in enhanced_prep_sheet for fail_text in ["failed", "Error"]):
-                    st.markdown("## 📄 Enhanced Executive Preparation Sheet")
-                    st.success("🎉 Enhanced two-stage research complete! GPT-4o quality + o1-preview insights:")
+                    st.markdown("## 📄 Executive Preparation Sheet")
+                    st.success("🎉 Pre-discovery Insights Report:")
                     st.markdown(enhanced_prep_sheet)
                     
                     # Copy button
@@ -405,7 +405,7 @@ def main():
                     
                     # Download option
                     st.download_button(
-                        label="💾 Download Enhanced Prep Sheet",
+                        label="💾 Download Prep Sheet",
                         data=enhanced_prep_sheet,
                         file_name=f"{company_data['company_name']}_enhanced_two_stage.md", 
                         mime="text/markdown"
