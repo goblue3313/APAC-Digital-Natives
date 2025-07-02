@@ -138,7 +138,7 @@ def create_comprehensive_prep_prompt(company_data):
 Research this company thoroughly using web search and generate a detailed preparation sheet. Focus on their technology stack, AI readiness, funding status, and potential OpenAI API use cases."""
 
 def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placeholder):
-    """Stage 1: Use GPT-4o with web search to create complete prep sheet"""
+    """Step 1: Use GPT-4o with web search to create complete prep sheet"""
     
     prep_prompt = create_comprehensive_prep_prompt(company_data)
     
@@ -146,9 +146,9 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
 
     try:
         progress_placeholder.progress(0.3)
-        status_placeholder.info("🔍 Stage 1: GPT-4o creating prep sheet with web search...")
+        status_placeholder.info("🔍 Step 1: GPT-4o creating prep sheet with web search...")
         
-        # Stage 1: Complete prep sheet with GPT-4o + web search
+        # Step 1: Complete prep sheet with GPT-4o + web search
         response = client.responses.create(
             model="gpt-4o",
             instructions=prep_prompt,
@@ -159,7 +159,7 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
         )
         
         progress_placeholder.progress(0.6)
-        status_placeholder.success("✅ Stage 1: GPT-4o prep sheet completed!")
+        status_placeholder.success("✅ Step 1: GPT-4o prep sheet completed!")
         
         # Extract the prep sheet
         if hasattr(response, 'output') and response.output:
@@ -174,15 +174,15 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
         
     except Exception as e:
         progress_placeholder.progress(0.6)
-        status_placeholder.error(f"❌ Stage 1 failed: {str(e)}")
+        status_placeholder.error(f"❌ Step 1 failed: {str(e)}")
         return f"GPT-4o prep sheet generation failed: {str(e)}"
 
 def stage2_o1_enhancement(company_data, gpt4o_prep_sheet, progress_placeholder, status_placeholder):
-    """Stage 2: Use o1-preview to enhance and refine the GPT-4o prep sheet"""
+    """Step 2: Use o1-preview to enhance and refine the GPT-4o prep sheet"""
     
     company_domain = extract_domain(company_data['website'])
     
-    # Stage 2: Enhancement prompt for o1-preview
+    # Step 2: Enhancement prompt for o1-preview
     enhancement_prompt = f"""You are an expert AI sales strategist and analyst. You have been provided with a comprehensive preparation sheet created by GPT-4o with web search. Your task is to enhance, refine, and improve this prep sheet using your advanced reasoning capabilities.
 
 **ENHANCEMENT OBJECTIVES:**
@@ -244,9 +244,9 @@ Enhance the existing prep sheet while maintaining the same structure. Add an enh
 
     try:
         progress_placeholder.progress(0.8)
-        status_placeholder.info("🧠 Stage 2: o1-preview enhancing and refining prep sheet...")
+        status_placeholder.info("🧠 Step 2: o1-preview enhancing and refining prep sheet...")
         
-        # Stage 2: Enhancement with o1-preview
+        # Step 2: Enhancement with o1-preview
         response = client.chat.completions.create(
             model="o1-preview",
             messages=[
@@ -258,44 +258,44 @@ Enhance the existing prep sheet while maintaining the same structure. Add an enh
         )
         
         progress_placeholder.progress(1.0)
-        status_placeholder.success("✅ Stage 2: o1-preview enhancement completed!")
+        status_placeholder.success("✅ Step 2: o1-preview enhancement completed!")
         
         return response.choices[0].message.content
         
     except Exception as e:
         progress_placeholder.progress(1.0)
-        status_placeholder.error(f"❌ Stage 2 failed: {str(e)}")
+        status_placeholder.error(f"❌ Step 2 failed: {str(e)}")
         return f"o1-preview enhancement failed: {str(e)}\n\nOriginal GPT-4o prep sheet:\n{gpt4o_prep_sheet}"
 
 def generate_enhanced_two_stage_prep_sheet(company_data, progress_placeholder, status_placeholder):
-    """Orchestrate the enhanced two-stage process"""
+    """Orchestrate the enhanced two-step process"""
     
     try:
-        # Stage 1: GPT-4o Complete Prep Sheet
+        # Step 1: GPT-4o Complete Prep Sheet
         progress_placeholder.progress(0.1)
-        status_placeholder.info("🚀 Starting enhanced two-stage process...")
+        status_placeholder.info("🚀 Starting enhanced two-step process...")
         
         gpt4o_prep_sheet = stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placeholder)
         
         if gpt4o_prep_sheet.startswith("GPT-4o prep sheet generation failed"):
             return gpt4o_prep_sheet
         
-        # Brief pause between stages
+        # Brief pause between steps
         time.sleep(1)
         
-        # Stage 2: o1-preview Enhancement
+        # Step 2: o1-preview Enhancement
         enhanced_prep_sheet = stage2_o1_enhancement(company_data, gpt4o_prep_sheet, progress_placeholder, status_placeholder)
         
         return enhanced_prep_sheet
         
     except Exception as e:
         progress_placeholder.empty()
-        status_placeholder.error(f"❌ Enhanced two-stage process failed: {str(e)}")
+        status_placeholder.error(f"❌ Enhanced two-step process failed: {str(e)}")
         return f"Error in enhanced process: {str(e)}"
 
 def main():
     st.set_page_config(
-        page_title="Enhanced Two-Stage Research", 
+        page_title="Enhanced Two-Step Research", 
         page_icon="📊",
         layout="wide"
     )
@@ -424,7 +424,7 @@ def main():
         🔗 **Real source links preserved**
         💡 **Enhanced use case analysis**
         📊 **Executive-ready format**
-        ⚡ **Efficient two-stage process**
+        ⚡ **Efficient two-step process**
         """)
         
         st.markdown("### Database Stats")
