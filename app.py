@@ -367,7 +367,7 @@ def main():
                 with col1:
                     st.metric("Monthly Visits", f"{company_data['monthly_visits']:,}")
                 with col2:
-                    st.metric("App Downloads", f"{company_data['app_downloads']:,}")
+                    st.metric("App Downloads (last 30 days)", f"{company_data['app_downloads']:,}")
                 with col3:
                     st.metric("Website", extract_domain(company_data['website']))
                 
