@@ -301,7 +301,7 @@ def main():
     )
     
     st.title("📊 Pre-Discovery Company Research")
-    st.markdown("*Step 1: Use GPT-4o to Complete Prep Sheet → Step 2: Use o1-preview to produce insights*")
+    st.markdown("*Use the box below to insert a Digital Native company in APAC to return a helpful pre-discovery sheet with key insights about the company.*")
     st.markdown("---")
     
     # Process explanation in sidebar
