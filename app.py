@@ -358,13 +358,13 @@ def generate_enhanced_two_stage_prep_sheet(company_data, progress_placeholder, s
 
 def main():
     st.set_page_config(
-        page_title="Pre-Discovery Company Research", 
+        page_title="APAC Digital Natives Prep-Sheet Generator", 
         page_icon="📊",
         layout="wide"
     )
     
-    st.title("📊 Pre-Discovery Company Research")
-    st.markdown("*Use the box below to insert a Digital Native company in APAC to return a helpful pre-discovery sheet with key insights about the company.*")
+    st.title("📊 APAC Digital Natives Prep-Sheet Generator")
+    st.markdown("*Use the box below to insert a Digital Native company in APAC to return a helpful pre-discovery sheet with key insights about the company. Please be patient as responses typically take 1-2 minutes to generate.*")
     st.markdown("---")
     
     # Process explanation in sidebar
