@@ -311,7 +311,7 @@ Enhance the existing prep sheet while maintaining the same structure. Add an enh
         
         # Stage 2: Enhancement with o1-preview
         response = client.chat.completions.create(
-            model="o1-preview",
+            model="gpt-5",
             messages=[
                 {
                     "role": "user", 
@@ -501,3 +501,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
