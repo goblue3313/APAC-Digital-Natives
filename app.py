@@ -208,7 +208,7 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
 
     try:
         progress_placeholder.progress(0.3)
-        status_placeholder.info("🔍 Step 1: GPT-4o creating prep sheet with web search...")
+        status_placeholder.info("🔍 Step 1: Creating prep sheet with web search...")
         
         # Stage 1: Complete prep sheet with GPT-4o + web search
         response = client.responses.create(
@@ -221,7 +221,7 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
         )
         
         progress_placeholder.progress(0.6)
-        status_placeholder.success("✅ Step 1: GPT-4o prep sheet completed!")
+        status_placeholder.success("✅ Step 1: Prep sheet completed!")
         
         # Extract the prep sheet
         if hasattr(response, 'output') and response.output:
@@ -237,10 +237,10 @@ def stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placehold
     except Exception as e:
         progress_placeholder.progress(0.6)
         status_placeholder.error(f"❌ Step 1 failed: {str(e)}")
-        return f"GPT-4o prep sheet generation failed: {str(e)}"
+        return f"Prep sheet generation failed: {str(e)}"
 
 def stage2_o1_enhancement(company_data, gpt4o_prep_sheet, progress_placeholder, status_placeholder):
-    """Stage 2: Use o1-preview to enhance and refine the GPT-4o prep sheet"""
+    """Stage 2: Use High Quality Model to enhance and refine the prep sheet"""
     
     company_domain = extract_domain(company_data['website'])
     
@@ -307,7 +307,7 @@ Enhance the existing prep sheet while maintaining the same structure. Add an enh
 
     try:
         progress_placeholder.progress(0.8)
-        status_placeholder.info("🧠 Step 2: o1-preview enhancing and refining prep sheet...")
+        status_placeholder.info("🧠 Step 2: High Quality Model enhancing and refining prep sheet...")
         
         # Stage 2: Enhancement with o1-preview
         response = client.chat.completions.create(
@@ -340,7 +340,7 @@ def generate_enhanced_two_stage_prep_sheet(company_data, progress_placeholder, s
         
         gpt4o_prep_sheet = stage1_gpt4o_prep_sheet(company_data, progress_placeholder, status_placeholder)
         
-        if gpt4o_prep_sheet.startswith("GPT-4o prep sheet generation failed"):
+        if gpt4o_prep_sheet.startswith("Prep sheet generation failed"):
             return gpt4o_prep_sheet
         
         # Brief pause between stages
@@ -372,7 +372,7 @@ def main():
         st.markdown("### Process Overview")
         st.info("""
         **Step 1: Complete Prep Sheet**
-        🔍 GPT-4o takes comprehensive prompt
+        🔍 LLM Model takes comprehensive prompt
         📊 Web searches + completes analysis
         🔗 Real source links included
         📋 Full prep sheet generated
@@ -387,10 +387,10 @@ def main():
         st.markdown("### Why this approach?")
         st.success("""
         ✅ **Why this approach?**
-        - GPT-4o: Excellent web research + concise output
-        - o1-preview: Strategic depth + reasoning
+        - Stage 1 (with tools): Excellent web research + concise output
+        - Higher Quality in Stage 2: Strategic depth + reasoning
         - Maintains GPT-4o's quality baseline
-        - Adds o1's analytical sophistication
+        - Adds Higher Quality Models's analytical sophistication
         """)
     
     # Load Excel data
@@ -445,7 +445,7 @@ def main():
             status_placeholder = st.empty()
             
             # Add process info
-            st.info("⏱️ **Process:** GPT-4o comprehensive prep sheet (45s) → o1-preview strategic enhancement (60s)")
+            st.info("⏱️ **Process:** Stage 1 comprehensive prep sheet (15s) → Higher Quality strategic enhancement (60s)")
             
             # Generate enhanced prep sheet
             enhanced_prep_sheet = generate_enhanced_two_stage_prep_sheet(
@@ -501,4 +501,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
